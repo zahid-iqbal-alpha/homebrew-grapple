@@ -1,6 +1,7 @@
 require "open-uri"
 require "json"
 require "digest"
+require "utils/github"
 
 class GrappleCli < Formula
   desc "Command-line interface for Grapple"
