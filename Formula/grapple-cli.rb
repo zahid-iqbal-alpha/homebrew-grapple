@@ -6,7 +6,7 @@ class GrappleCli < Formula
   desc "Command-line interface for Grapple"
   homepage "https://github.com/grapple-solutions/grapple-cli"
 
-  def set_github_token
+  def self.set_github_token
     @github_token = ENV["HOMEBREW_GITHUB_API_TOKEN"]
     unless @github_token
       raise CurlDownloadStrategyError, "Environmental variable HOMEBREW_GITHUB_API_TOKEN is required."
@@ -14,7 +14,7 @@ class GrappleCli < Formula
     validate_github_repository_access!
   end
 
-  def validate_github_repository_access!
+  def self.validate_github_repository_access!
     # Test access to the repository
     GitHub.repository(@owner, @repo)
     rescue GitHub::API::HTTPNotFoundError
