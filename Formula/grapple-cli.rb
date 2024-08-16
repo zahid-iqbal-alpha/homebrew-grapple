@@ -11,20 +11,6 @@ class GrappleCli < Formula
     unless @github_token
       raise CurlDownloadStrategyError, "Environmental variable HOMEBREW_GITHUB_API_TOKEN is required."
     end
-    validate_github_repository_access!
-  end
-
-  def self.validate_github_repository_access!
-    # Test access to the repository
-    GitHub.repository(@owner, @repo)
-    rescue GitHub::API::HTTPNotFoundError
-    # We switched to GitHub::API::HTTPNotFoundError,
-    # because we can now handle bad credentials messages
-    message = <<~EOS
-      HOMEBREW_GITHUB_API_TOKEN can not access the repository: #{@owner}/#{@repo}
-      This token may not have permission to access the repository or the url of formula may be incorrect.
-    EOS
-    raise CurlDownloadStrategyError, message
   end
   
   def self.latest_release_version(repo_owner, repo_name)
